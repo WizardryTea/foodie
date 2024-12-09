@@ -1,0 +1,45 @@
+{% load static %}
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'blog:index' %}">
+        <img src="{% static 'D:/MyDev/KProject/foodie/static/img/logo.png' %}" width="80" height="80" class="d-inline-block align-top" alt="">
+        <span class="font-logo">Foodie</span>
+      </a>
+      {% with request.resolver_match.view_name as view_name %}
+        <ul class="nav  nav-pills">
+          <li class="nav-item">
+            <a class="nav-link {% if view_name == 'pages:about' %} text-white {% endif %}" href="{% url 'pages:about' %}">
+              О нас
+            </a>
+          </li>
+          <li a class="nav-item">
+            <a class="nav-link {% if view_name == 'pages:rules' %} text-white {% endif %}" href="{% url 'pages:rules' %}">
+              Правила
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'blog:create_post' %}">Написать пост</a></button>
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'blog:profile' user.username %}">{{ user.username }}</a></button>
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'logout' %}">Выйти</a></button>
+            </div>
+          {% else %}
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'login' %}">Войти</a></button>
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'registration' %}">Регистрация</a></button>
+            </div>
+            
+          {% endif %}
+          <img src="{% static 'D:/MyDev/KProject/foodie/static/img/user.png' %}" width="80" height="80" class="d-inline-block align-top" alt="Пользователь">
+        
+        </ul>
+      {% endwith %}
+    </div>
+  </nav>
+</header>

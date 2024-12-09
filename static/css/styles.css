@@ -1,0 +1,257 @@
+:root {
+  --color-bg-main: #452B1F;
+  --color-bg-secondary: #c20716;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D8B67E;
+  --color-accent: #FFA07A;
+  --color-accent-d: #f57e4f;
+  --col-orange: #FF7626;
+  --col-dark-orange: #800211;
+  --col-light-o: #f5e8d2;
+  --col-dark-o: #e68d49;
+}
+body {
+  /*цвет фона*/
+  font-family: Arial, sans-serif;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-main);
+  background-image: url("/static/img/back.png");
+}
+h1, h2, h3 {
+  color: var(--color-text-secondary);
+}
+.filter-form h1{
+  COLOR: BLACK;
+}
+header {
+  background-image: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-main));
+  padding: 30px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  color: var(--color-accent);
+}
+
+.btn-group {
+  display: flex;
+}
+
+.btn {
+  background: linear-gradient(to bottom, var(--col-orange), var(--col-dark-orange));
+  background: #f5e8d2;
+  margin-right: 10px;
+  padding: 5px 15px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+
+}
+
+
+.btn:hover {
+  background-color: rgba(255, 72, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer {
+  background: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 20px 0;
+  color: var(--color-text-secondary);
+}
+
+.contact-info {
+  color: var(--color-text-secondary);
+}
+.btn-primary {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(255, 72, 0, 0.3); /*Тень под кнопкой*/
+}
+
+/*Текст написать пост, пользователь, выйти*/
+body > header > nav > div > ul > div > button:nth-child(n)
+{
+  color:#dab9a6;
+}
+/*Написать пост, пользователь, выйти, цвет границ кнопок*/
+.btn-outline-primary {
+  /* --bs-btn-color: #0d6efd; */
+  
+  --bs-btn-border-color: #ffe3e3 !important; 
+}
+/*поле меню*/
+body > header > nav > div > ul
+{
+  margin: 15px;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background-color: rgba(245, 222, 179, 0.355);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-bg-main);
+  color: var(--color-accent);
+}
+
+.gradient-bg{
+  padding: 20px;
+  border-radius: 10px;
+  background-image: linear-gradient(135deg, var(--color-bg-main), var(--color-bg-secondary));
+  background-size: 100% 200%;
+  animation: gradientAnimation 15s infinite;
+  color: --color-accent;
+}
+
+/*--------------------------------------*/
+  /* Стили для карточек*/
+.card {
+  /*background-image: url("/static/img/back5.jpg");*/
+  border: 1px solid #613C1D;
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+  
+.card-img-top {
+  filter: brightness(80%) saturate(150%);
+}
+
+/*Комментарии*/
+.media-body{
+  background: var(--col-light-o);
+  padding: 15px;
+  border-color: #452B1F;
+  border-radius: 20px;
+  border-style: ridge;
+}
+/*---------------*/
+body > header > nav > div > ul > li{
+  background-color: var(--color-bg-secondary);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+}
+.li .a {
+  background-color: var(--color-bg-secondary);
+}
+
+body > header > nav > div > ul li {
+  padding: 10px;
+  margin: 15px 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+/*О нас, правила при наведении*/
+body > header > nav > div > ul li:hover {
+  background-color: rgba(113, 158, 230, 0.895);
+  color: var(--color-text-primary);
+}
+/*О нас, правила текст*/
+body > header > nav > div > ul a {
+  color: black !important;
+}
+body > header > nav > div > ul a:hover {
+  color: #ffe3e3 !important;
+}
+body > header > nav > div > ul li.active {
+  background-color: rgba(255, 255, 255, 0.895);
+  color: var(--color-text-primary);
+  font-size: 20px;
+}
+body > header > nav > div > ul li {
+  background-color: rgba(255, 255, 255, 0.853);
+  color: var(--color-text-primary);
+  font-size: 20px;
+}
+
+.nav .a{
+  color: var(--col-light-o);
+}
+
+/*------------------*/
+.filter-block {
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.filter-block h1 {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+/*Тело формы фильтрции*/
+.filter-form {
+  background-color: rgba(224, 200, 180, 0.862);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.filter-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.filter-form select, .filter-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.filter-form select {
+  background-size: 16px auto;
+}
+
+.filter-form select:hover {
+  cursor: pointer;
+}
+
+.filter-form input[type="text"] {
+  border: 1px solid rgba(255, 255, 255, 0.781);
+}
+
+.filter-form button {
+  background-color: rgba(255, 255, 255, 0.2);
+  /*color: var(--col-dark-orange);цвет кнопки фильтрации*/
+  border: none;
+  margin: 15px 0px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-form button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+/*foodie header*/
+.font-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: bold;
+  /*color: #333;*/
+  letter-spacing: 2px;
+}
+
+.font-logo:hover {
+  color: #4a4a4a;
+}
+  
+  .profile-container{
+    background: rgba(255, 255, 255, 0.9) !important;
+    padding: 25px 0px;
+    border-radius: 15px;
+    border-style:initial;
+    margin-bottom: 35px;
+  }
