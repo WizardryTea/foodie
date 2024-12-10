@@ -1,29 +1,35 @@
----
-layout: default
----
 {% extends "base.html" %}
+{% load spurl %}
 {% block title %}
   Лента записей
 {% endblock %}
 {% block content %}
   <div filter-block>
-    <form method="get" class="mb-4 filter-form">
+    <form method="get" class="mb-4 filter-form" id="filter-form">
       <h1>Фильтрация</h1>
       <div>
         <label for="location">Локация:</label>
+        
         <select id="location" name="location">
           <option value="">Все</option>
-          <option value="ул. Садовая, д.3">Москва, ул. Садовая, д.3</option>
-          <option value="Большой Черкасский переулок, 3">Москва, Большой Черкасский переулок, 3</option>
-          <option value="ул. Садовая, д.47">Москва, ул. Садовая, д.47</option>
+          
+          <option value="ул. Садовая, д.3" {% if request.GET.location == "ул. Садовая, д.3" %}selected{% endif %}>Москва, ул. Садовая, д.3</option>
+          <option value="Большой Черкасский переулок, 3" {% if request.GET.location == "Большой Черкасский переулок, 3" %}selected{% endif %}>Москва, Большой Черкасский переулок, 3</option>
+          <option value="ул. Садовая, д.47" {% if request.GET.location == "ул. Садовая, д.47" %}selected{% endif %}>Москва, ул. Садовая, д.47</option>
+        
         </select>
+        
       </div>
       <div>
         <label for="author">Имя пользователя:</label>
-        <input type="text" id="author" name="author" value="{{ form.author.value }}">
+        <input type="text" id="author" name="author" value="{{ request.GET.author }}">
       </div>
-      <button type="submit">Применить фильтр</button>
-      <button type="reset" class="btn-reset">Сбросить фильтры</button>
+      <button type="submit" id="apply-filter-btn">Применить фильтры</button>
+      
+      <a href="http://127.0.0.1:8000/?location=&author=">
+        <button type="button">Сбросить фильтры</button>
+      </a>
+    
     </form>
   </div>
 
@@ -36,75 +42,19 @@ layout: default
   {% include "includes/paginator.html" %}
 {% endblock %}
 
-
-
-
-
-
-
-
-
-
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterForm = document.querySelector('.filter-form');
-    const resetButton = document.querySelector('.btn-reset');
-    const locationSelect = document.getElementById('location');
-    const authorInput = document.getElementById('author');
-  
-    // Сохранение значений фильтров в localStorage
-    function saveFilters() {
-      localStorage.setItem('locationFilter', locationSelect.value);
-      localStorage.setItem('authorFilter', authorInput.value);
-    }
-  
-    // Загрузка значений фильтров из localStorage
-    function loadFilters() {
-      locationSelect.value = localStorage.getItem('locationFilter') || '';
-      authorInput.value = localStorage.getItem('authorFilter') || '';
-    }
-  
-    // Применение фильтров при отправке формы
-    filterForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // Предотвращаем стандартную отправку формы
-  
-      saveFilters(); // Сохраняем текущие значения фильтров
-  
-      // Создаем строку запроса с параметрами фильтрации
-      let queryString = "?";
-      if (locationSelect.value) {
-        queryString += `location=${encodeURIComponent(locationSelect.value)}&`;
-      }
-      if (authorInput.value) {
-        queryString += `author=${encodeURIComponent(authorInput.value)}&`;
-      }
-      queryString = queryString.slice(0, -1); // Удаляем последний символ '&'
-  
-      // Получаем текущую страницу из URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const currentPage = urlParams.get('page') || '1';
-  
-      // Переходим на текущую страницу с примененными фильтрами
-      window.location.href = `${window.location.pathname}${queryString}&page=${currentPage}`;
-  
-    });
-  
-  
-    // Сброс фильтров
-    resetButton.addEventListener('click', (event) => {
-      event.preventDefault(); // Предотвращаем стандартную отправку формы
-  
-      localStorage.removeItem('locationFilter');
-      localStorage.removeItem('authorFilter');
-      locationSelect.value = '';
-      authorInput.value = '';
-  
-      // Переходим на первую страницу без фильтров
-      window.location.href = window.location.pathname;
-    });
-  
-    // Загрузка сохраненных фильтров при загрузке страницы
-    loadFilters();
+  // Функция для применения фильтров
+  document.getElementById('apply-filter-btn').addEventListener('click', function(event) {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+    
+    const form = document.getElementById('filter-form');
+    const formData = new FormData(form);
+    const queryParams = new URLSearchParams(formData).toString();
+    
+    // Получаем текущую страницу из URL (если есть)
+    const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
+    
+    // Перезагружаем страницу с параметрами фильтрации и текущей страницей
+    window.location.href = ?${queryParams}&page=${currentPage};
   });
 </script>

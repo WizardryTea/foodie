@@ -232,3 +232,4 @@ def post_list(request):
 
     context = {'page_obj': page_obj, 'form': form} # Передаем форму в контекст
     return render(request, 'blog/index.html', context)
+
