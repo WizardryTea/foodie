@@ -40,6 +40,7 @@ STATICFILES_DIRS = [
 ]
 
 INSTALLED_APPS = [
+    'foodie',
     'spurl',
     'django.contrib.admin',
     'django.contrib.auth',

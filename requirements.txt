@@ -30,3 +30,4 @@ typing_extensions==4.12.2
 tzdata==2024.2
 yapf==0.32.0
 cryptography
+django-spurl

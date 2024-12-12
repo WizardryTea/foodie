@@ -6,6 +6,18 @@
 {% block content %}
   <div filter-block>
     <form method="get" class="mb-4 filter-form" id="filter-form">
+      
+      <h1>Информация</h1>
+      <p>Количество постов: {{ post_count }}</p>
+      
+      <p>Список блюд</p>
+    <!--{{ dishes_html }}-->
+    <div class="row justify-content-center">
+      <table id="d" border="3" cellpadding="5" cellspacing="0">
+        {{ dishes_html | safe }}
+      </table>
+    </div>
+    
       <h1>Фильтрация</h1>
       <div>
         <label for="location">Локация:</label>
@@ -29,10 +41,8 @@
       <a href="http://127.0.0.1:8000/?location=&author=">
         <button type="button">Сбросить фильтры</button>
       </a>
-    
     </form>
   </div>
-
   {% for post in page_obj %}
     <article class="mb-5">
       {% include "includes/post_card.html" %}

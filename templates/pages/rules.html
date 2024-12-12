@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-  Правила ЗОЖ
+  Правила
 {% endblock %}
 {% block content %}
-  <div class="d-flex flex-column align-items-center">
 
+  <div class="d-flex flex-column align-items-center">
+    
     <div class="card mb-5" style="width: 40rem;">
       <div class="card-header">
         Правила посещения
@@ -28,8 +29,22 @@
     <div class="card-header">
       Правила, введенные из-за коронавируса
     </div>
-    <div class="card-body">
+    <div class="card-body" style="display: flex; flex-direction: column;">
     <img src="/static/img/ruleswash.png" alt="Правила гигиены">
     </div>
   </div>
 {% endblock %}
+<style>
+  table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+  th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+  }
+  th {
+      background-color: #f2f2f2;
+  }
+</style>

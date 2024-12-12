@@ -8,6 +8,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm, CommentForm, UserForm
 from .models import Post, Category, User, Comment
 
+from django.http import JsonResponse
+from django.db import connection
 
 NUMBER_OF_PAGINATOR_PAGES = 2
 
@@ -28,9 +30,19 @@ def get_paginator(request, queryset, number_of_pages=NUMBER_OF_PAGINATOR_PAGES):
     page_number = request.GET.get('page')
     return paginator.get_page(page_number)
 
+def get_post_count():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT COUNT(*) FROM blog_post WHERE is_published = TRUE")
+        row = cursor.fetchone()
+    return row[0]  # Возвращаем количество постов
     
 def index(request):
     """Главная страница / Лента публикаций"""
+
+    post_count = get_post_count()  # Получаем количество постов
+    posts = Post.objects.all()  # основной запрос на получение постов
+
+    dishes_html = get_dishes_html()  # Получаем HTML блюда
 
     location = request.GET.get('location')
     author = request.GET.get('author')
@@ -53,6 +65,9 @@ def index(request):
         'page_obj': page_obj,
         'location': location,
         'author': author,
+        'posts': posts,
+        'post_count': post_count,
+        'dishes_html': dishes_html,  # Передаем в контекст
     }
     return render(request, 'blog/index.html', context)
 
@@ -233,3 +248,35 @@ def post_list(request):
     context = {'page_obj': page_obj, 'form': form} # Передаем форму в контекст
     return render(request, 'blog/index.html', context)
 
+from django.shortcuts import render
+def show_sql(request):
+    if request.method == 'POST':
+        print("1111")
+        pass
+    return render(request, 'index.html')
+
+
+def execute_sql(request):
+    try:
+        # Выполнение SQL-запроса
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM blog_location")
+            rows = cursor.fetchall()
+
+        # Формирование ответа
+        data = [{'id': row[0], 'is_published': row[1], 'created_at': row[2], 'name': row[3]} for row in rows]
+        return JsonResponse(data, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+def get_dishes_html():
+    with connection.cursor() as cursor:
+        # Вызов хранимой функции для получения HTML-кода
+        cursor.execute("SELECT get_dishes_html()")
+        result = cursor.fetchone()
+    
+    # Проверяем, есть ли результат и возвращаем строчку без лишних пробелов
+    if result and result[0]:
+        return result[0].strip()  # Возвращаем чистый HTML
+    return ''

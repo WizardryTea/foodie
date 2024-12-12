@@ -248,10 +248,10 @@ body > header > nav > div > ul li {
   color: #4a4a4a;
 }
   
-  .profile-container{
-    background: rgba(255, 255, 255, 0.9) !important;
-    padding: 25px 0px;
-    border-radius: 15px;
-    border-style:initial;
-    margin-bottom: 35px;
-  }
+.profile-container{
+  background: rgba(255, 255, 255, 0.9) !important;
+  padding: 25px 0px;
+  border-radius: 15px;
+  border-style:initial;
+  margin-bottom: 35px;
+}

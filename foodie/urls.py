@@ -6,10 +6,11 @@ from django.views.generic.edit import CreateView
 from django.urls import include, path, reverse_lazy
 
 
+
 handler404 = 'pages.views.page_not_found'
 handler500 = 'pages.views.internal_server_error'
 
-urlpatterns = [
+urlpatterns = [    
     path('', include('blog.urls')),
     path('pages/', include('pages.urls')),
     path('admin/', admin.site.urls),
@@ -24,3 +25,4 @@ urlpatterns = [
         name='registration',
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
