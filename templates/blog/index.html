@@ -10,13 +10,23 @@
       <h1>Информация</h1>
       <p>Количество постов: {{ post_count }}</p>
       
-      <p>Список блюд</p>
+      <h1>Список блюд</h1>
     <!--{{ dishes_html }}-->
-    <div class="row justify-content-center">
-      <table id="d" border="3" cellpadding="5" cellspacing="0">
-        {{ dishes_html | safe }}
+    <div class="row">
+      <table id="d" class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Блюдо</th>
+            <th scope="col" class="text-center">Цена</th>
+            <th scope="col" class="text-center">Время (мин)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ dishes_html | safe }}
+        </tbody>
       </table>
     </div>
+    
     
       <h1>Фильтрация</h1>
       <div>
